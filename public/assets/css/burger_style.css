@@ -1,0 +1,12 @@
+body{
+    background: url(../img/barbecue-bbq-beef-776314.jpg);
+    background-size: cover;
+}
+
+.header{
+    background: rgba(0, 0, 0, 0.589);
+}
+
+.notDevoured, .devoured{
+    background: rgba(0, 0, 0, 0.788);
+}
