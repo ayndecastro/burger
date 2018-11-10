@@ -12,7 +12,7 @@ if (process.env.JAWSDB_URL) {
 		host: 'us-cdbr-iron-east-01.cleardb.net',
 		user: 'ba76b836b662f5',
 		password: 'fbb9dbf3',
-		database: 'burgers_db'
+		database: 'heroku_8f04cb480ff2a47'
 	})
 };
 connection.connect(function(err) {
