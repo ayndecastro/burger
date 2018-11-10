@@ -1,57 +1,40 @@
-const express = require("express");
+// Pull in required dependencies
+var express = require('express');
+var router = express.Router();
 
-let router = express.Router();
+// Import the model (burger.js) to use its database functions.
+var burger = require('../models/burger.js');
 
-let burger = require("../models/burger");
-
-router.get("/", function(req,res){
-    burger.all(function(data){
-        let burgrObject = {
-            burger: data
-        };
-        console.log(burgrObject);
-        res.render("index", burgrObject);
-    });
+// Create the routes and associated logic
+router.get('/', function(req, res) {
+  burger.all(function(data) {
+    var hbsObject = {
+      burgers: data
+    };
+    // console.log(hbsObject);
+    res.render('index', hbsObject);
+  });
 });
 
-router.post("/api/burger", function(req,res){
-    burger.create([
-        "burger_name", "devaured"
-    ],[
-        req.body.burger_name, req.body.devoured
-    ], function(result){
-        res.json({ id: result.insertId});
-    });
+router.post('/burgers', function(req, res) {
+  burger.create([
+    'burger_name'
+  ], [
+    req.body.burger_name
+  ], function(data) {
+    res.redirect('/');
+  });
 });
 
+router.put('/burgers/:id', function(req, res) {
+  var condition = 'id = ' + req.params.id;
 
-router.put("/api/burger/:id", function(req, res) {
-    let condition = "id = " + req.params.id;
-
-    console.log("condition", condition);
-
-    burger.update({
-        devoured: req.body.devoured
-    }, condition, function(resut){
-        if(result.changedRows == 0){
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
-    });
+  burger.update({
+    devoured: true
+  }, condition, function(data) {
+    res.redirect('/');
+  });
 });
 
-router.delete("/api/burger/:id", function(req, res) {
-    let condition = "id= " + req.params.id;
-
-    burger.delete(condition, function(result) {
-        if(result.affectedRow == o) {
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
-    });
-});
-
-// export to server.js
+// Export routes for server.js to use.
 module.exports = router;

@@ -1,37 +1,42 @@
+<h1>Eat-Da-Burger!</h1>
+
 <main>
-  <div class="jumbotron jumbotron-fluid header">
-    <div class="container">
-      <h1 class="display-4 text-center text-light">BURGER</h1>
-      <p class="lead"></p>
-    </div>
-  </div>
   <div class="container">
-    <div class="row rounded">
-      <div class="col-4 rounded notDevoured border">
-        {{#each burger}}
-        {{#unless devoured}}
-        {{> burger/burger-block devoured=false}}
-        {{/unless}}
+    <div class="row">
+      <div class="col s6">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+            <div>
+              <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
+                <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
+              </form>
+            </div>
+          {{/unless}}
         {{/each}}
       </div>
-      <div class="col-4 mid justify-content-center">
-        <h2 class="text-center" align="center">Add a Burger</h2>
-        <form class="create-form" align="center">
 
-          <div class="form-group">
-            <input type="text" id="ca" name="name" placeholder="    Your style burger">
-          </div>
-
-          <button type="submit" class=" btn-lg btn-danger">Add Burger</button>
-        </form>
-      </div>
-      <div class="col-4 rounded devoured border">
-       {{#each burger}}
-        {{#unless devoured}}
-        {{> burger/burger-block devoured=true}}
-        {{/unless}}
+      <div class="col s6">
+        {{#each burgers}}
+          {{#if this.devoured}}
+            <div class='burgerEaten'>
+              <div>
+                {{this.burger_name}}
+              </div>
+            </div>
+          {{/if}}
         {{/each}}
       </div>
     </div>
   </div>
 </main>
+
+<h2>Add A Burger Option</h2>
+
+<div class="row">
+  <div class="col s12">
+    <form action="/burgers" method="POST">
+      <input type="text" id="name" name="burger_name" placeholder="Uber Delicious Burger">
+      <button type="submit" class="addBurgerButton">Add The Burger</button>
+    </form>
+  </div>
+</div>
