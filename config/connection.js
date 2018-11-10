@@ -8,7 +8,7 @@ if (process.env.JAWSDB_URL) {
 } else {
 	
 	connection = mysql.createConnection({
-		port: 3306,
+		port: process.env.port || 3306,
 		host: 'us-cdbr-iron-east-01.cleardb.net',
 		user: 'ba76b836b662f5',
 		password: 'fbb9dbf3',
