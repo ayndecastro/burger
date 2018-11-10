@@ -15,6 +15,7 @@ if (process.env.JAWSDB_URL) {
 		database: 'heroku_8f04cb480ff2a47'
 	})
 };
+
 connection.connect(function(err) {
   if (err) {
     console.error('ERROR: MySQL connection error -- ' + err.stack + '\n\n');
