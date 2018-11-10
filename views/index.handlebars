@@ -1,42 +1,56 @@
-<h1>Eat-Da-Burger!</h1>
-
-<main>
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <div class="row">
-      <div class="col s6">
-        {{#each burgers}}
-          {{#unless this.devoured}}
-            <div>
-              <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-                <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
-              </form>
-            </div>
-          {{/unless}}
-        {{/each}}
-      </div>
-
-      <div class="col s6">
-        {{#each burgers}}
-          {{#if this.devoured}}
-            <div class='burgerEaten'>
-              <div>
-                {{this.burger_name}}
-              </div>
-            </div>
-          {{/if}}
-        {{/each}}
-      </div>
-    </div>
-  </div>
-</main>
-
-<h2>Add A Burger Option</h2>
-
-<div class="row">
-  <div class="col s12">
-    <form action="/burgers" method="POST">
-      <input type="text" id="name" name="burger_name" placeholder="Uber Delicious Burger">
-      <button type="submit" class="addBurgerButton">Add The Burger</button>
-    </form>
+    <h1 class="display-4">Whatever-Burgers</h1>
+    <p class="lead">The no BS Burger Joint serves you the burger that you want.</p>
+    <p class="lead">We don't just serve some pre-set burger, we serve you whatever burger you want, even if it's a burger with candy buns!</p>
   </div>
 </div>
+
+<div class="container">
+<div class="row">
+  <div class="notDevoured rounded col-lg-4">
+
+<h2 class="text-center">Burgers not devoured!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#unless devoured}}
+      {{> burger/burger-block devoured=false}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+  </div>
+  <div class="col-lg-4">
+    <h2 class="text-center">ADD A BURGER</h2>
+<form class="create-form">
+
+  <div class="form-group d-flex justify-content-center">
+    <input type="text" id="ca" name="burger_name" class="rounded" placeholder="Craziest burger here!">
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="submit" class= "btn btn-danger">Add burger</button>
+  </div>
+
+  
+</form>
+  </div>
+  <div class="col-lg-4 devoured rounded">
+<h2 class="text-center">Devoured!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burger/burger-block devoured=true}}
+    {{/if}}
+  {{/each}}
+</ul>
+  </div>
+</div>
+</div>
+
+
+
+
+
+

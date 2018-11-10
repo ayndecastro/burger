@@ -1,40 +1,49 @@
-// Pull in required dependencies
-var express = require('express');
-var router = express.Router();
 
-// Import the model (burger.js) to use its database functions.
-var burger = require('../models/burger.js');
+let express = require('express');
+let router = express.Router();
 
-// Create the routes and associated logic
+let burger = require('../models/burger.js');
+
 router.get('/', function(req, res) {
   burger.all(function(data) {
-    var hbsObject = {
+    let hbsObject = {
       burgers: data
     };
-    // console.log(hbsObject);
     res.render('index', hbsObject);
   });
 });
 
-router.post('/burgers', function(req, res) {
+router.get("/api/burgers", function(req,res){
+  burger.all(function(data){
+    res.send(data);
+  })
+})
+
+router.post("/api/burgers", (req, res) => {
   burger.create([
-    'burger_name'
-  ], [
-    req.body.burger_name
-  ], function(data) {
-    res.redirect('/');
+      "burger_name", "devoured"
+  ], [req.body.burger_name, 0], result => {
+      // res.json({
+      //     id: result.insertId
+      // });
+      res.redirect('/')
   });
 });
 
-router.put('/burgers/:id', function(req, res) {
-  var condition = 'id = ' + req.params.id;
+router.put("/api/burgers/:id", (req, res) => {
+  let condition = "id = " + req.params.id;
+  console.log("condition is", condition);
 
   burger.update({
-    devoured: true
-  }, condition, function(data) {
-    res.redirect('/');
+      devoured: true
+  }, condition, result => {
+      if (result.changedRows == 0) {
+          return res.status(404).end();
+      } else {
+          res.status(200).end();
+      }
   });
 });
 
-// Export routes for server.js to use.
+// Export
 module.exports = router;

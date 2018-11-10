@@ -16,51 +16,7 @@
 <body>
 	{{{ body }}}
 	{{!-- javascript --}}
-	{{!-- <script>
-		$(document).ready(function () {
-			console.log('hello');
-
-			$(".burgerBtn").on("click", function () {
-				console.log(this);
-				let id = $(this).data("id");
-				let newDevoured = $(this).data("newDevoured");
-
-				let devouredState = {
-					devoured: newDevoured
-				};
-
-				$.ajax("/api/burger/" + id, {
-					type: "PUT",
-					data: devouredState
-				}).then(function () {
-					console.log("change devoured state to", newDevoured);
-					location.reload();
-				});
-			});
-
-			$(".create-form").on("submit", function (e) {
-				e.preventDefault();
-
-				let newBurger = {
-					name: $("#ca").val().trim(),
-					devoured: false
-				};
-
-				$.ajax("/api/cats", {
-					type: "POST",
-					data: newBurger
-				}).then(
-					function () {
-						console.log("add a burger");
-						// Reload the page to get the updated list
-						location.reload();
-					});
-			})
-
-
-
-		})
-	</script> --}}
+	<script src="/assets/js/app.js"></script>
 	<!-- bootstrap -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 	 crossorigin="anonymous"></script>
