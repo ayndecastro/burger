@@ -2,10 +2,10 @@ let mysql = require('mysql');
 
 	let connection = mysql.createConnection({
 		port: process.env.port || 3306,
-		host: 'us-cdbr-iron-east-01.cleardb.net',
-		user: 'ba76b836b662f5',
-		password: 'fbb9dbf3',
-		database: 'heroku_8f04cb480ff2a47'
+		host: '	jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+		user: 'l5uxrqpwzylzjp53',
+		password: 'efzmnm2ehy2itltl',
+		database: 'e6adsamx1qvoy295'
 	})
 
 connection.connect(function(err) {
